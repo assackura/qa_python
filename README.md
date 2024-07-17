@@ -1,6 +1,5 @@
 # qa_python
 1) test_add_new_book_not_add_not_correct_name_books
-2) test_add_new_book_not_add_two_identical_books
 3) test_add_new_book_not_add_genre
 4) test_genre_checking_list_for_genres
 5) test_set_book_genre_set_genre
