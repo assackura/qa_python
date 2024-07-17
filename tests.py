@@ -10,14 +10,6 @@ class TestBooksCollector:
     # дальше идет название метода, который тестируем add_new_book_
     # затем, что тестируем add_two_books - добавление двух книг
     def test_add_new_book_add_nine_books(self, load_data_without_genre):
-        # создаем экземпляр (объект) класса BooksCollector
-
-        # добавляем две книги
-        #collector.add_new_book('Гордость и предубеждение и зомби')
-        #collector.add_new_book('Что делать, если ваш кот хочет вас убить')
-
-        # проверяем, что добавилось именно две
-        # словарь books_rating, который нам возвращает метод get_books_rating, имеет длину 2
         assert len(load_data_without_genre.get_books_genre()) == 9
 
     # напиши свои тесты ниже
