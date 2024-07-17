@@ -48,9 +48,9 @@ class TestBooksCollector:
     def test_add_book_in_favorites_books_list_favorite_list(self, load_data_in_favorite):
         assert load_data_in_favorite.get_list_of_favorites_books() == TestConstants.FAVORITES_BOOK
         
-    @pytest.mark.parametrize('name_book', ['', 'sdhfbsdjfbjh', 'Незнайка на луне'])
+    @pytest.mark.parametrize('name_book', ['', 'sdhfbsdjfbjh', TestConstants.BOOK])
     def test_add_book_in_favorites_not_add_favorite_list(self, name_book, load_data_in_favorite):
-        load_data_in_favorite.add_book_in_favorites(TestConstants.BOOK)
+        load_data_in_favorite.add_book_in_favorites(name_book)
         assert len(load_data_in_favorite.get_list_of_favorites_books()) == 2
         
     def test_delete_book_in_favorites_books_list_favorite_list(self, load_data_in_favorite):
