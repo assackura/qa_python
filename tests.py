@@ -21,6 +21,12 @@ class TestBooksCollector:
         collector.add_new_book(book_name)
         assert len(collector.get_books_genre()) == 0
         
+    def test_default_books_genre(self, collector):
+        assert collector.books_genre == {}
+        
+    def test_default_favorites(self, collector):
+        assert collector.favorites == []
+        
     def test_add_new_book_not_add_genre(self, load_data_without_genre):
         assert load_data_without_genre.get_books_genre()[TestConstants.BOOK] == ''
         
@@ -38,8 +44,9 @@ class TestBooksCollector:
     def test_get_books_with_specific_genre_various_genres_books_specified_genre(self, load_data_with_genre):
         assert load_data_with_genre.get_books_with_specific_genre('Детективы') == ['Бедная лиза', 'Странные игры']
         
-    def test_get_books_with_specific_genre_not_list_genre_0(self, load_data_with_genre):
-        assert load_data_with_genre.get_books_with_specific_genre('Сказки') == []
+    @pytest.mark.parametrize('genre_name', ['', 'Сказки', 123, '123', '!!!#!@$%'])
+    def test_get_books_with_specific_genre_not_list_genre_0(self, load_data_with_genre, genre_name):
+        assert load_data_with_genre.get_books_with_specific_genre(genre_name) == []
         
     def test_get_books_for_children_get_not_age_rating_books(self, load_data_with_genre, get_list_age_rating):
         result = list(set(get_list_age_rating) & set(load_data_with_genre.get_books_for_children()))
@@ -56,6 +63,11 @@ class TestBooksCollector:
     def test_delete_book_in_favorites_books_list_favorite_list(self, load_data_in_favorite):
         load_data_in_favorite.delete_book_from_favorites(TestConstants.BOOK)
         assert len(load_data_in_favorite.get_list_of_favorites_books()) == 1
+    
+    @pytest.mark.parametrize('name_book', ['', 'sdhfbsdjfbjh', 123, '!@#$!@%'])
+    def test_delete_book_in_favorites_books_not_data_in_favorite(self, load_data_in_favorite, name_book):
+        load_data_in_favorite.delete_book_from_favorites(name_book)
+        assert len(load_data_in_favorite.get_list_of_favorites_books()) == 2
         
         
         
