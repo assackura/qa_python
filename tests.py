@@ -16,7 +16,7 @@ class TestBooksCollector:
 
     # напиши свои тесты ниже
     # чтобы тесты были независимыми в каждом из них создавай отдельный экземпляр класса BooksCollector()
-    @pytest.mark.parametrize('book_name', ['', 'testtestetstestesttesttestetstestesttesttestetstestesttesttestetstestesttesttestetstestest', 'testtestetstestesttesttestetstestesttesttestetstestesttesttestetstestesttesttestetstestesttesttestetstestesttesttestetstestesttesttestetstestesttesttestetstestesttesttestetstestest'])
+    @pytest.mark.parametrize('book_name', ['', 123, 123.5, True, 'testtestetstestesttesttestetstestesttesttestetstestesttesttestetstestesttesttestetstestest', 'testtestetstestesttesttestetstestesttesttestetstestesttesttestetstestesttesttestetstestesttesttestetstestesttesttestetstestesttesttestetstestesttesttestetstestesttesttestetstestest'])
     def test_add_new_book_not_add_not_correct_name_books(self, book_name, collector):
         collector.add_new_book(book_name)
         assert len(collector.get_books_genre()) == 0
@@ -44,7 +44,7 @@ class TestBooksCollector:
     def test_get_books_with_specific_genre_various_genres_books_specified_genre(self, load_data_with_genre):
         assert load_data_with_genre.get_books_with_specific_genre('Детективы') == ['Бедная лиза', 'Странные игры']
         
-    @pytest.mark.parametrize('genre_name', ['', 'Сказки', 123, '123', '!!!#!@$%'])
+    @pytest.mark.parametrize('genre_name', ['', 'Сказки', 123, '123', '!!!#!@$%', 123.5, True, 'kdsjfbshfcuksthbvidhbiudhgvukdhbvgsdbxfgvgiudsngdugudhxfoivgdbhiugvbhdgicdcnucxsikgchdkchdfvgndhgjdlgjcd'])
     def test_get_books_with_specific_genre_not_list_genre_0(self, load_data_with_genre, genre_name):
         assert load_data_with_genre.get_books_with_specific_genre(genre_name) == []
         
@@ -55,7 +55,7 @@ class TestBooksCollector:
     def test_add_book_in_favorites_books_list_favorite_list(self, load_data_in_favorite):
         assert load_data_in_favorite.get_list_of_favorites_books() == TestConstants.FAVORITES_BOOK
         
-    @pytest.mark.parametrize('name_book', ['', 'sdhfbsdjfbjh', TestConstants.BOOK])
+    @pytest.mark.parametrize('name_book', ['', 'sdhfbsdjfbjh', TestConstants.BOOK, 3532, 6.6, True, 'kjdfngkjdfgdgjhbjhdbjbsdkbvdskjgbvdfkjvndfvjhbdvjhbrdfbrjygweiugfdjfbdhfbsjbfgerjgbdgbjhesfbshfbsf'])
     def test_add_book_in_favorites_not_add_favorite_list(self, name_book, load_data_in_favorite):
         load_data_in_favorite.add_book_in_favorites(name_book)
         assert len(load_data_in_favorite.get_list_of_favorites_books()) == 2
@@ -64,7 +64,7 @@ class TestBooksCollector:
         load_data_in_favorite.delete_book_from_favorites(TestConstants.BOOK)
         assert len(load_data_in_favorite.get_list_of_favorites_books()) == 1
     
-    @pytest.mark.parametrize('name_book', ['', 'sdhfbsdjfbjh', 123, '!@#$!@%'])
+    @pytest.mark.parametrize('name_book', ['', 'sdhfbsdjfbjh', 123, '!@#$!@%', 43.2, True, 'ldfknviudfnvidfnvkdjfvnkjsdnviudfnvhiufdgnufdivgniufjcvgirdfngciusnghcicughidfcgnnfdgvcnhndfvgcjdfugjg'])
     def test_delete_book_in_favorites_books_not_data_in_favorite(self, load_data_in_favorite, name_book):
         load_data_in_favorite.delete_book_from_favorites(name_book)
         assert len(load_data_in_favorite.get_list_of_favorites_books()) == 2
